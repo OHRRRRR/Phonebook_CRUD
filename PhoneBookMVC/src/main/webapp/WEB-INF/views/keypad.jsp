@@ -8,40 +8,41 @@
 <title>전화번호입력</title>
 <link rel="stylesheet" href="styles.css">
 <style type="text/css">
-    #phoentitle {
-        text-align: center;
-        margin-top: 20px; 
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f5f5; /* Optional: set a background color */
+    }
+    #phonetitle {
+        margin-bottom: 20px; 
         font-size: 2em; 
     }
-    #add{
+    #add, #check {
         color: black;
-        position: relative; 
-        left: 200px;
+        margin: 10px 5px;
+        text-decoration: none;
     }
-    #check{
-        color: black;
-        position: relative; 
-        left: 250px;
-    }
-    body {
-        width: 600px;
-        height: 600px;
-    }
-    #keypad {
-        margin: 0 auto;
-        width: 420px;
-        height: 500px;
-    }
-    input {
+    #numInput {
         color: black;
         background: white;
         text-align: center;
-        margin: 70px auto 40px;
+        margin: 20px 0;
         font-size: 3em;
-        display: block;
-        width: 400px;
+        width: 420px;
         border-radius: 6px;
         border: 2px solid black;
+    }
+    #keypad {
+        width: 420px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
     .keypad button {
         margin: 1%;
@@ -60,7 +61,7 @@
 </style>
 </head>
 <body>
-    <h2 id="phoentitle">전화번호를 입력하세요</h2>
+    <h2 id="phonetitle">전화번호를 입력하세요</h2>
     <a href="#" id="add">번호추가</a>
     <a href="list" id="check">전체확인하기</a>
     <input type="text" class="keypad" id="numInput" disabled="disabled" />

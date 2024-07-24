@@ -4,24 +4,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Person정보입력</title>
+<title>새로운 연략처</title>
+<style>
+#formtitle{
+	margin-bottom: 20px; 
+	font-size: 2em; 
+}
+</style>
 </head>
 <body>
-  <h3>Person정보입력</h3>
-  <hr>
-  <!-- Add Java code to retrieve the phone number from the query string -->
+  <h3 id="formtitle">새로운 연락처</h3>
   <% 
-    String phoneNumber = request.getParameter("phonenumber");
-    if (phoneNumber == null) {
-      phoneNumber = "";
+    String phonenumber = request.getParameter("phonenumber");
+    if (phonenumber == null) {
+      phonenumber = "";
     }
   %>
+  
   <form method="post">
-    이름: <input type="text" name="name"><br>
-    나이: <input type="text" name="age"><br>
-    직업: <input type="text" name="job"><br>
-    전화번호: <input type="text" name="phonenumber" value="<%= phoneNumber %>"><br>
-   <button>입력</button>
+  	<h3>이름</h3>
+    <input type="text" name="name"><br>
+    <hr>
+    <h3>나이</h3>
+    <input type="text" name="age"><br>
+    <hr>
+    <h3>직업</h3>
+    <input type="text" name="job"><br>
+    <hr>
+    <h3>전화번호</h3>
+    <input type="text" name="phonenumber" value="<%= phonenumber %>"><br>
+   <button>추가하기</button>
   </form>
   <br>
   <a href="list">사람목록보기</a>

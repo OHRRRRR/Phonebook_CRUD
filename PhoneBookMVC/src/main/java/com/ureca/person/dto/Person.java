@@ -5,14 +5,14 @@ public class Person {
     private String name;
     private int age;
     private String job;
-    private int phonenumber;
+    private long phonenumber;
 
     
     public Person() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Person(int no, String name, int age, String job, int phonenumber) {
+	public Person(int no, String name, int age, String job, long phonenumber) {
 		super();
 		this.no = no;
 		this.name = name;
@@ -53,11 +53,11 @@ public class Person {
 		this.job = job;
 	}
 	
-	public int getPhonenumber() {
+	public long getPhonenumber() {
 		return phonenumber;
 	}
 
-	public void setPhonenumber(int phonenumber) {
+	public void setPhonenumber(long phonenumber) {
 		this.phonenumber = phonenumber;
 	}
 

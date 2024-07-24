@@ -5,10 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ureca.person.model.dao.PersonDAO">
  
   <insert id="insert" parameterType="Person">
-     insert into person (name,age,job,phonenumber) values (#{name},#{age},#{job},#{phonenumber})
+     insert into person (name, age, job, phonenumber) values (#{name}, #{age}, #{job}, #{phonenumber})
   </insert>
   
-  <update id="update" parameterType="person">
+  <update id="update" parameterType="Person">
      update person set age=#{age}, job=#{job}, phonenumber=#{phonenumber} where no=#{no}
   </update>
   
@@ -16,13 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      delete from person where no=#{no}
   </delete>
   
-  <select id="select" parameterType="int" 
-          resultType="Person">
-     select no,name,age,job,phonenumber from person where no=#{no}
+  <select id="select" parameterType="int" resultType="Person">
+     select no, name, age, job, phonenumber from person where no=#{no}
   </select>
   
   <select id="selectAll" resultType="Person">
-     select no,name,age,job,phonenumber from person order by no desc
+     select no, name, age, job, phonenumber from person order by no desc
   </select>
 
 </mapper>
