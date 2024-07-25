@@ -4,16 +4,80 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>새로운 연략처</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+<title>새로운 연락처 등록</title>
 <style>
-#formtitle{
-	margin-bottom: 20px; 
-	font-size: 2em; 
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+#formtitle { 
+    margin-top: 100px; 
+    text-align: center;
+    font-size: 2em; 
+}
+
+form {
+    width: 300px;
+}
+
+#star {
+    cursor: pointer;
+    font-size: 1.5em;
+    color: gray;
+    margin-left: 230px;
+    margin-top: -10px;
+    
+    }
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#addbutton, a {
+    display: inline-block;
+    background: black;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 70px;
+}
+
+a {
+    background: black;
+    color: white;
+    margin-right: 20px;
+}
+
+#addbutton {
+    margin-right: 20px;
+}
+
+#button-container {
+    margin-left: -25px;
+    display: flex;
+    justify-content: flex-start;
+    width: 450px;
 }
 </style>
 </head>
 <body>
-  <h3 id="formtitle">새로운 연락처</h3>
+  <h3 id="formtitle">새로운 연락처 등록</h3>
   <% 
     String phonenumber = request.getParameter("phonenumber");
     if (phonenumber == null) {
@@ -22,20 +86,35 @@
   %>
   
   <form method="post">
-  	<h3>이름</h3>
+    <div style="display: flex; align-items: center;">
+      <h3>이름</h3>
+      <i id="star" class="fa-regular fa-star"></i>
+    </div>
     <input type="text" name="name"><br>
-    <hr>
     <h3>나이</h3>
     <input type="text" name="age"><br>
-    <hr>
     <h3>직업</h3>
     <input type="text" name="job"><br>
-    <hr>
     <h3>전화번호</h3>
     <input type="text" name="phonenumber" value="<%= phonenumber %>"><br>
-   <button>추가하기</button>
+    <!-- Hidden input to store the bookmark status -->
+    <input type="hidden" name="bookmark" id="bookmark" value = "0"><br>
+    <div id="button-container">
+        <button type="submit" id="addbutton">추가하기</button>
+        <a id="total" href="list">전체목록확인</a>
+        <a id="black" href="list">차단목록확인</a>     
+    </div>
   </form>
-  <br>
-  <a href="list">사람목록보기</a>
+  
+  <script>
+    document.getElementById('star').addEventListener('click', function() {
+      this.classList.toggle('fa-regular');
+      this.classList.toggle('fa-solid');
+
+      // Update the hidden input value based on the star's state
+      var isSolidStar = this.classList.contains('fa-solid');
+      document.getElementById('bookmark').value = isSolidStar ? "1" : "0";
+    }); 
+  </script>
 </body>
 </html>
