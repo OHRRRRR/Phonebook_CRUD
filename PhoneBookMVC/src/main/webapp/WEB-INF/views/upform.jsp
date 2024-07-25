@@ -1,40 +1,136 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Person정보수정</title>
-   <script type="text/javascript">
-       function remove(){
-    	   location.href='delete?no=${person.no}';
-       }
-   </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+<title>Person 정보 수정</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+    
+    #upformtitle { 
+    margin-top: 100px; 
+    text-align: center;
+    font-size: 2em; 
+}
+
+    #star {
+    cursor: pointer;
+    font-size: 1.5em;
+    color: gray;
+    margin-left: 230px;
+    margin-top: -10px;
+    
+    }
+
+    form {
+        width: 320px;
+        margin-top: -15px;
+   
+
+    input[type="text"], input[type="hidden"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        display: inline-block;
+        background: black;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        font-size: 1em;
+        margin-top: 20px;
+        margin-right: 10px;
+
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #333;
+    }
+
+    #button-container {
+        display: flex;
+        justify-content:right;
+    }
+
+    a {
+        display: inline-block;
+        background: black;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1em;
+        margin-top: 0px;
+        margin-right: -70px;
+    }
+
+    a:hover {
+        background: #333;
+    }
+</style>
+<script type="text/javascript">
+    function remove() {
+        location.href = 'delete?no=${person.no}';
+    }
+</script>
 </head>
 <body>
-  <h3>Person정보수정</h3>
+  <h3 id="upformtitle">Person 정보 수정</h3>
   <hr>
   <form method="post">
-  <input type="hidden" name="no" value="${person.no }">
-    이름: <input type="text" name="name" value="${person.name }" readonly><br>
-    나이: <input type="text" name="age" value="${person.age }"><br>
-    직업: <input type="text" name="job" value="${person.job }"><br>
-    전화번호: <input type="text" name="phonenumber" value="${person.phonenumber }"><br>
-   <button type="submit">수정</button>
-   <!-- <button type="button" onclick="location.href=delete?no=3">삭제</button> -->
-   <button type="button" onclick="location.href='delete?no=${person.no}'">삭제</button>
+    <input type="hidden" name="no" value="${person.no}">    
+     <div style="display: flex; align-items: center;">
+   		 <h3 for="name">이름</h3>
+      	<i id="star" class="fa-regular fa-star"></i>
+    </div>
+    <input type="text" id="name" name="name" value="${person.name}" readonly><br>
+    <h3 for="age">나이</h3>
+    <input type="text" id="age" name="age" value="${person.age}"><br>
+    
+    <h3 for="job">직업</h3>
+    <input type="text" id="job" name="job" value="${person.job}"><br>
+    
+    <h3 for="phonenumber">전화번호</h3>
+    <input type="text" id="phonenumber" name="phonenumber" value="${person.phonenumber}"><br>
+    <input type="hidden" name="bookmark" id="bookmark" value = "${person.bookmark}"><br>
+    <div id="button-container">
+      <button type="submit">수정</button>
+      <button type="button" onclick="remove()">삭제</button>
+      <button type="button">차단</button>  
+    </div>
   </form>
   <br>
-  <a href="list">사람목록보기</a>
+  <a href="list">전체목록확인</a>
+  
+    <script>
+    document.getElementById('star').addEventListener('click', function() {
+      this.classList.toggle('fa-regular');
+      this.classList.toggle('fa-solid');
+
+      // Update the hidden input value based on the star's state
+      var isSolidStar = this.classList.contains('fa-solid');
+      document.getElementById('bookmark').value = isSolidStar ? "1" : "0";
+    }); 
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

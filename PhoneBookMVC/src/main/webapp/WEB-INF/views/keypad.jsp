@@ -70,7 +70,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#keypad').keypad();
-            // Bind click event to "번호추가" button
+            // 번호추가 클릭
             $('#add').click(function() {
                 var phoneNumber = $('#numInput').val();
                 if (phoneNumber) {
