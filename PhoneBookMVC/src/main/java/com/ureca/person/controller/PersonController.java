@@ -87,6 +87,19 @@ public class PersonController {
 		return "list";  //5.
 	}
 	
+	@GetMapping("/bookmark") //1.
+	public String bookmark(Model model) { //DB목록출력
+		//Model은 영역객체 중에 request와 같음
+		
+		  try {
+		        List<Person> bookmark = service.getFavoritePersons(); // 즐겨찾기 목록 가져오기
+		        model.addAttribute("bookmark", bookmark); // 모델에 저장
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return "bookmark"; // favorites.jsp로 이동
+	}
+	
 	@GetMapping("/upform")//  localhost:8080/person/upform?no=3
 	public String upform(@RequestParam("no") int no,
 			             Model model) {//수정폼 보이기

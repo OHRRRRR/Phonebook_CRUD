@@ -14,4 +14,6 @@ public interface PersonService {
 	
 	public Person read(int no)throws SQLException;
 	public List<Person> readAll()throws SQLException;
+    public List<Person> getFavoritePersons() throws SQLException;
+ 
 }

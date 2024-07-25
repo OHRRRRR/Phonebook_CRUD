@@ -78,7 +78,7 @@
     }
 
     a {
-        color: #007BFF;
+        color: #3981E5;
         text-decoration: none;
     }
 
@@ -90,8 +90,13 @@
     
     }
 
+	div{
+	    margin-left: 700px;
+	
+	}
     #total-link {
         margin-top: 20px;
+        margin-right: 20px;
         padding: 10px 20px;
         background-color: black;
         color: white;
@@ -110,7 +115,6 @@
   <h3>전체 목록</h3>
   <hr>
 
-  <!-- 검색 폼 추가 -->
   <form method="get" action="list">
     <input type="text" name="query" placeholder="검색어를 입력하세요" value="${param.query}">
     <button type="submit">검색</button>
@@ -129,7 +133,7 @@
       <c:forEach items="${list}" var="person">
         <tr>
           <td>${person.no}</td>
-          <td><a href="upform?no=${person.no}">${person.name}</a></td>
+          <td id = "personname"><a href="upform?no=${person.no}">${person.name}</a></td>
           <td>${person.age}</td>
           <td>${person.job}</td>
           <td>${person.phonenumber}</td>
@@ -151,6 +155,11 @@
     <p>등록된 Person이 없습니다.</p>
   </c:if>
   <br>
-  <a id="total-link" href="form">Person 입력하기</a>
+  <div>
+  <a id="total-link" href="blacklist">차단목록확인</a>
+  <a id="total-link" href="bookmark">즐겨찾기확인</a>
+  <a id="total-link" href="form">+</a>
+  </div>
+  
 </body>
 </html>

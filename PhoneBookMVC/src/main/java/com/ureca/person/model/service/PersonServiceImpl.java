@@ -2,6 +2,7 @@ package com.ureca.person.model.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,13 @@ public class PersonServiceImpl implements PersonService {
 	public List<Person> readAll() throws SQLException {
 		return dao.selectAll();
 	}
+	
+	 @Override
+	    public List<Person> getFavoritePersons() throws SQLException {
+	        List<Person> allPersons = readAll(); // 전체 목록을 가져오는 기존 메서드
+	        return allPersons.stream()
+	                         .filter(person -> person.getBookmark() == 1)
+	                         .collect(Collectors.toList());
+	    }
 
 }
