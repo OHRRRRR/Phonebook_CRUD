@@ -85,6 +85,10 @@
     a:hover {
         text-decoration: underline;
     }
+    i{
+      	margin-left: -150px ;
+    
+    }
 
     #total-link {
         margin-top: 20px;

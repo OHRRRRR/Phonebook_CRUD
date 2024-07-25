@@ -20,24 +20,23 @@
     }
     
     #upformtitle { 
-    margin-top: 100px; 
-    text-align: center;
-    font-size: 2em; 
-}
+        margin-top: 100px; 
+        text-align: center;
+        font-size: 2em; 
+    }
 
     #star {
-    cursor: pointer;
-    font-size: 1.5em;
-    color: gray;
-    margin-left: 230px;
-    margin-top: -10px;
-    
+        cursor: pointer;
+        font-size: 1.5em;
+        color: gray;
+        margin-left: 230px;
+        margin-top: -10px;
     }
 
     form {
         width: 320px;
         margin-top: -15px;
-   
+    }
 
     input[type="text"], input[type="hidden"] {
         width: 100%;
@@ -59,7 +58,6 @@
         font-size: 1em;
         margin-top: 20px;
         margin-right: 10px;
-
         cursor: pointer;
     }
 
@@ -69,7 +67,7 @@
 
     #button-container {
         display: flex;
-        justify-content:right;
+        justify-content: right;
     }
 
     a {
@@ -81,7 +79,7 @@
         border-radius: 5px;
         font-size: 1em;
         margin-top: 0px;
-        margin-right: -70px;
+        margin-left: 140px;
     }
 
     a:hover {
@@ -92,6 +90,21 @@
     function remove() {
         location.href = 'delete?no=${person.no}';
     }
+
+    window.onload = function() {
+        // Get the bookmark value
+        var bookmarkValue = document.getElementById('bookmark').value;
+        var starIcon = document.getElementById('star');
+
+        // Set the star icon based on the bookmark value
+        if (bookmarkValue === "1") {
+            starIcon.classList.remove('fa-regular');
+            starIcon.classList.add('fa-solid');
+        } else {
+            starIcon.classList.remove('fa-solid');
+            starIcon.classList.add('fa-regular');
+        }
+    };
 </script>
 </head>
 <body>
@@ -99,9 +112,9 @@
   <hr>
   <form method="post">
     <input type="hidden" name="no" value="${person.no}">    
-     <div style="display: flex; align-items: center;">
-   		 <h3 for="name">이름</h3>
-      	<i id="star" class="fa-regular fa-star"></i>
+    <div style="display: flex; align-items: center;">
+        <h3 for="name">이름</h3>
+        <i id="star" class="fa-regular fa-star"></i>
     </div>
     <input type="text" id="name" name="name" value="${person.name}" readonly><br>
     <h3 for="age">나이</h3>
@@ -112,22 +125,21 @@
     
     <h3 for="phonenumber">전화번호</h3>
     <input type="text" id="phonenumber" name="phonenumber" value="${person.phonenumber}"><br>
-    <input type="hidden" name="bookmark" id="bookmark" value = "${person.bookmark}"><br>
+    <input type="hidden" name="bookmark" id="bookmark" value="${person.bookmark}"><br>
     <div id="button-container">
       <button type="submit">수정</button>
       <button type="button" onclick="remove()">삭제</button>
       <button type="button">차단</button>  
     </div>
+      <br>
+    <a href="list">전체목록확인</a>
   </form>
-  <br>
-  <a href="list">전체목록확인</a>
   
-    <script>
+  <script>
     document.getElementById('star').addEventListener('click', function() {
       this.classList.toggle('fa-regular');
       this.classList.toggle('fa-solid');
 
-      // Update the hidden input value based on the star's state
       var isSolidStar = this.classList.contains('fa-solid');
       document.getElementById('bookmark').value = isSolidStar ? "1" : "0";
     }); 
