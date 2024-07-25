@@ -1,6 +1,8 @@
 package com.ureca.person.model.service;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +17,7 @@ public class PersonServiceImpl implements PersonService {
 
 	@Autowired
 	PersonDAO dao;
+	
 	
 	@Override
 	public int add(Person person) throws SQLException {
@@ -48,5 +51,8 @@ public class PersonServiceImpl implements PersonService {
 	                         .filter(person -> person.getBookmark() == 1)
 	                         .collect(Collectors.toList());
 	    }
+
+	 
+	 
 
 }

@@ -91,6 +91,11 @@
         location.href = 'delete?no=${person.no}';
     }
 
+    function block() {
+        // Redirect to block person endpoint
+        location.href = 'block?no=${person.no}';
+    }
+
     window.onload = function() {
         // Get the bookmark value
         var bookmarkValue = document.getElementById('bookmark').value;
@@ -129,7 +134,7 @@
     <div id="button-container">
       <button type="submit">수정</button>
       <button type="button" onclick="remove()">삭제</button>
-      <button type="button">차단</button>  
+      <button type="button">차단</button> <!-- Block button -->
     </div>
       <br>
     <a href="list">전체목록확인</a>
@@ -144,5 +149,6 @@
       document.getElementById('bookmark').value = isSolidStar ? "1" : "0";
     }); 
   </script>
+
 </body>
 </html>

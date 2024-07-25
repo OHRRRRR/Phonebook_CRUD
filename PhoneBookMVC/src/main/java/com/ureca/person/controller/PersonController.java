@@ -2,15 +2,19 @@ package com.ureca.person.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ureca.person.dto.Person;
 import com.ureca.person.model.service.PersonService;
@@ -19,7 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller //스프링 컨테이너로 객체 관리 받고 싶어요!!
 @RequestMapping("/person")
-public class PersonController {
+public class PersonController  {
 	
 	@Autowired
 	PersonService service;//service=null;기본값
@@ -69,23 +73,30 @@ public class PersonController {
 		return "redirect:list";  // 5.	
 	}
 	
-	@GetMapping("/list") //1.
-	public String list(Model model) { //DB목록출력
-		//Model은 영역객체 중에 request와 같음
-		
-		try {
-			//목록 테이블에 출력할 데이터 얻어오기
-			List<Person> list = service.readAll(); //3.			
-			
-			model.addAttribute("list", list);
-			//4.영역에 데이터를 저장! => 왜? 데이터를 View와 공유하기 위해
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return "list";  //5.
+	@GetMapping("/list")
+	public String list(@RequestParam(value = "query", required = false) String query, Model model) {
+	    try {
+	        // Get the list of people
+	        List<Person> list = service.readAll();
+
+	        // Filter the list based on the query if it is provided
+	        if (query != null && !query.trim().isEmpty()) {
+	            String lowerCaseQuery = query.toLowerCase();
+	            list = list.stream()
+	                       .filter(person -> person.getName().toLowerCase().contains(lowerCaseQuery) ||
+	                                         String.valueOf(person.getPhonenumber()).contains(query))
+	                       .collect(Collectors.toList());
+	        }
+
+	        // Add the filtered or complete list to the model
+	        model.addAttribute("list", list);
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return "list";
 	}
+
 	
 	@GetMapping("/bookmark") //1.
 	public String bookmark(Model model) { //DB목록출력
@@ -99,6 +110,8 @@ public class PersonController {
 		    }
 		    return "bookmark"; // favorites.jsp로 이동
 	}
+	
+    
 	
 	@GetMapping("/upform")//  localhost:8080/person/upform?no=3
 	public String upform(@RequestParam("no") int no,
@@ -115,6 +128,7 @@ public class PersonController {
 		
 		return "upform";
 	}
+	
 	
 	@PostMapping("/upform")
 	public String modify(Person person) {//DB수정 요청

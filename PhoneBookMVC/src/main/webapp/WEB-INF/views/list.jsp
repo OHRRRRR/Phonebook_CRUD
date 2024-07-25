@@ -85,18 +85,18 @@
     a:hover {
         text-decoration: underline;
     }
-    i{
-      	margin-left: -150px ;
-    
+
+    i {
+        margin-left: -150px;
     }
 
-	div{
-	    margin-left: 700px;
-	
-	}
+    div {
+        margin-left: 700px;
+    }
+
     #total-link {
         margin-top: 20px;
-        margin-right: 20px;
+        margin-right: 30px;
         padding: 10px 20px;
         background-color: black;
         color: white;
@@ -108,6 +108,20 @@
     #total-link:hover {
         background-color: #333;
     }
+
+    #form-link {
+        margin-left: 715px; /* Adjusted margin */
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        border-radius: 100px;
+        font-size: 1em;
+    }
+    
+        #form-link:hover {
+        background-color: #333;
+    }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 </head>
@@ -115,10 +129,11 @@
   <h3>전체 목록</h3>
   <hr>
 
-  <form method="get" action="list">
-    <input type="text" name="query" placeholder="검색어를 입력하세요" value="${param.query}">
+ <form method="get" action="list">
+    <input type="text" name="query" placeholder="이름이나 번호를 입력하세요" value="${param.query}">
     <button type="submit">검색</button>
-  </form>
+    <a id="form-link" href="form">+</a>
+</form>
 
   <c:if test="${!empty list}">
     <table>
@@ -133,7 +148,7 @@
       <c:forEach items="${list}" var="person">
         <tr>
           <td>${person.no}</td>
-          <td id = "personname"><a href="upform?no=${person.no}">${person.name}</a></td>
+          <td id="personname"><a href="upform?no=${person.no}">${person.name}</a></td>
           <td>${person.age}</td>
           <td>${person.job}</td>
           <td>${person.phonenumber}</td>
@@ -151,14 +166,13 @@
       </c:forEach>		    
     </table>  
   </c:if>	  
-  <c:if test="${empty list}">  
-    <p>등록된 Person이 없습니다.</p>
+  <c:if test="${empty list}" >  
+    <p>등록된 정보가 없습니다.</p>
   </c:if>
   <br>
   <div>
   <a id="total-link" href="blacklist">차단목록확인</a>
   <a id="total-link" href="bookmark">즐겨찾기확인</a>
-  <a id="total-link" href="form">+</a>
   </div>
   
 </body>
