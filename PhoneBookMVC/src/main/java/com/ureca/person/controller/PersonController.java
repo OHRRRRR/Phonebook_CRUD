@@ -111,6 +111,19 @@ public class PersonController  {
 		    return "bookmark"; // favorites.jsp로 이동
 	}
 	
+	@GetMapping("/blacklist") //1.
+	public String blacklist(Model model) { //DB목록출력
+		//Model은 영역객체 중에 request와 같음
+		
+		  try {
+		        List<Person> blacklist = service.getBlacklistPersons(); // 즐겨찾기 목록 가져오기
+		        model.addAttribute("blacklist", blacklist); // 모델에 저장
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return "blacklist"; // favorites.jsp로 이동
+	}
+	
     
 	
 	@GetMapping("/upform")//  localhost:8080/person/upform?no=3

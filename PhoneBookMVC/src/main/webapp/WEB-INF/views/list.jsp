@@ -133,6 +133,8 @@
     <input type="text" name="query" placeholder="이름이나 번호를 입력하세요" value="${param.query}">
     <button type="submit">검색</button>
     <a id="form-link" href="form">+</a>
+    
+    
 </form>
 
   <c:if test="${!empty list}">
@@ -143,7 +145,7 @@
         <th>나이</th>
         <th>직업</th>
         <th>전화번호</th>
-        <th>즐겨찾기</th>
+        <th>정보확인</th>
       </tr>	   
       <c:forEach items="${list}" var="person">
         <tr>
@@ -157,9 +159,9 @@
               <c:when test="${person.bookmark == 1}">
                 <i class="fa-solid fa-star" style="color: gray;"></i>
               </c:when>
-              <c:otherwise>
-                <i class="fa-regular fa-star" style="color: gray;"></i>
-              </c:otherwise>
+              <c:when test="${person.blacklist == 1}">
+                <i class="fa-solid fa-ban" style="color: gray;"></i>
+              </c:when>
             </c:choose> 
           </td>
         </tr>

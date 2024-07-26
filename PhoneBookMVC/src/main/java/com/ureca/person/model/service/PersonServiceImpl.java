@@ -51,6 +51,14 @@ public class PersonServiceImpl implements PersonService {
 	                         .filter(person -> person.getBookmark() == 1)
 	                         .collect(Collectors.toList());
 	    }
+	 
+	 @Override
+	    public List<Person> getBlacklistPersons() throws SQLException {
+	        List<Person> allPersons = readAll(); // 전체 목록을 가져오는 기존 메서드
+	        return allPersons.stream()
+	                         .filter(person -> person.getBlacklist() == 1)
+	                         .collect(Collectors.toList());
+	    }
 
 	 
 	 

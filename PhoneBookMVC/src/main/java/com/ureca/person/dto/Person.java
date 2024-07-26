@@ -7,13 +7,17 @@ public class Person {
     private String job;
     private long phonenumber;
     private int bookmark;
+    private int blacklist;
+    private String email;
+    private String memo;
+
 
     
     public Person() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Person(int no, String name, int age, String job, long phonenumber, int bookmark) {
+	public Person(int no, String name, int age, String job, long phonenumber, int bookmark, int blacklist, String email, String memo) {
 		super();
 		this.no = no;
 		this.name = name;
@@ -21,6 +25,9 @@ public class Person {
 		this.job = job;
 		this.phonenumber = phonenumber;
 		this.bookmark= bookmark;
+		this.blacklist=blacklist;
+		this.email=email;
+		this.memo=memo;
 	}
 
 	public int getNo() {
@@ -70,11 +77,35 @@ public class Person {
 	public void setBookmark(int bookmark) {
 		this.bookmark = bookmark;
 	}
+	
+	public int getBlacklist() {
+		return blacklist;
+	}
+
+	public void setBlacklist(int blacklist) {
+		this.blacklist = blacklist;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
 
 
 	@Override
 	public String toString() {
-		return "Person [no=" + no + ", name=" + name + ", age=" + age + ", job=" + job + ",phonenumber=" + phonenumber  + ",bookmark=" + bookmark + "]";
+		return "Person [no=" + no + ", name=" + name + ", age=" + age + ", job=" + job + ",phonenumber=" + phonenumber  + ",bookmark=" + bookmark + ",blacklist=" + blacklist + "]";
 	}
     
     

@@ -15,6 +15,7 @@ public interface PersonService {
 	public Person read(int no)throws SQLException;
 	public List<Person> readAll()throws SQLException;
     public List<Person> getFavoritePersons() throws SQLException;
-    
+    public List<Person> getBlacklistPersons() throws SQLException; // 추가해야 할 메서드
+
 
 }
