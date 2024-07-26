@@ -8,7 +8,7 @@
 <title>새로운 연락처 등록</title>
 <style>
 body {
-	margin: 0;
+    margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
@@ -21,7 +21,7 @@ body {
 }
 
 #formtitle { 
-    margin-top: 100px; 
+    margin-top: 50px; /* Adjusted margin */
     text-align: center;
     font-size: 2em; 
 }
@@ -34,20 +34,35 @@ form {
     cursor: pointer;
     font-size: 1.5em;
     color: gray;
-    margin-left: 230px;
-    margin-top: -10px;
-    
-    }
+    margin-left: 220px;
+    margin-right: 10px;
+    margin-top: -5px;
+    margin-bottom: 20px;
+}
 
-input[type="text"] {
+#block {
+    cursor: pointer;
+    font-size: 1.5em;
+    color: gray;
+    margin-top: -5px;
+    margin-bottom: 20px;
+}
+
+input[type="text"], textarea {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
-#addbutton, a {
+textarea {
+    height: 100px; /* Adjust this value to increase or decrease the size */
+    resize: vertical; /* Allow users to resize the textarea vertically */
+}
+
+#addbutton, #total,#black {
     display: inline-block;
     background: black;
     color: white;
@@ -56,10 +71,10 @@ input[type="text"] {
     border: none;
     border-radius: 5px;
     font-size: 1em;
-    margin-top: 70px;
+    margin-top: 20px;
 }
 
-a {
+#total,#black {
     background: black;
     color: white;
     margin-right: 20px;
@@ -75,10 +90,51 @@ a {
     justify-content: flex-start;
     width: 450px;
 }
+
+/* New styles for profile picture upload */
+#profile-picture-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#profile-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#profile-picture img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#upload-button {
+    color:black;
+    text-decoration: none;
+    border: none;
+    align-items: center;   
+    margin-right: -5px;
+    
+}
 </style>
 </head>
 <body>
   <h3 id="formtitle">새로운 연락처 등록</h3>
+  
+  <div id="profile-picture-container">
+    <div id="profile-picture">
+      <!-- Placeholder for profile picture -->
+      <img id="profile-img" src="default-profile.png" alt="" />
+    </div>
+    <a id="upload-button" href="#">사진 추가</a>
+  </div>
+  
   <% 
     String phonenumber = request.getParameter("phonenumber");
     if (phonenumber == null) {
@@ -87,23 +143,26 @@ a {
   %>
   
   <form method="post">
-    <div style="display: flex; align-items: center;">
-      <h3>이름</h3>
-      <i id="star" class="fa-regular fa-star"></i>
+    <div>
+          <i id="star" class="fa-regular fa-star"></i>
+          <i id="block" class="fa-solid fa-toggle-on"></i>
     </div>
-    <input type="text" name="name"><br>
-    <h3>나이</h3>
-    <input type="text" name="age"><br>
-    <h3>직업</h3>
-    <input type="text" name="job"><br>
-    <h3>전화번호</h3>
-    <input type="text" name="phonenumber" value="<%= phonenumber %>"><br>
+    <input type="text" name="name" placeholder="이름"><br>
+    <input type="text" name="age" placeholder="나이"><br>
+    <input type="text" name="job" placeholder="직업"><br>
+    <br>
+    <input type="text" name="phonenumber" value="<%= phonenumber %>" placeholder="전화번호"><br>
+    <input type="text" name="email" placeholder="이메일"><br>
+    <br>
+    <textarea name="memo" placeholder="메모"></textarea><br>
+    
     <!-- Hidden input to store the bookmark status -->
-    <input type="hidden" name="bookmark" id="bookmark" value = "0"><br>
+    <input type="hidden" name="bookmark" id="bookmark" value="0"><br>
+    <input type="hidden" name="blacklist" id="blacklist" value="0"><br>
     <div id="button-container">
         <button type="submit" id="addbutton">추가하기</button>
         <a id="total" href="list">전체목록확인</a>
-        <a id="black" href="list">차단목록확인</a>     
+        <a id="black" href="blacklist">차단목록확인</a>     
     </div>
   </form>
   
@@ -115,7 +174,20 @@ a {
       // Update the hidden input value based on the star's state
       var isSolidStar = this.classList.contains('fa-solid');
       document.getElementById('bookmark').value = isSolidStar ? "1" : "0";
-    }); 
+    });
   </script>
+  
+   <script>
+    document.getElementById('block').addEventListener('click', function() {
+      this.classList.toggle('fa-toggle-on');
+      this.classList.toggle('fa-toggle-off');
+
+      // Update the hidden input value based on the toggle state
+      var isSolidBlock = this.classList.contains('fa-toggle-off');
+      document.getElementById('blacklist').value = isSolidBlock ? "1" : "0";
+    });
+  </script>
+  
+  
 </body>
 </html>
