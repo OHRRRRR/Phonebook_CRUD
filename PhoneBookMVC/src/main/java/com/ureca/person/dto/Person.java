@@ -10,6 +10,8 @@ public class Person {
     private int blacklist;
     private String email;
     private String memo;
+    private String profileimage;
+    private String imageurl;
 
 
     
@@ -17,7 +19,7 @@ public class Person {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Person(int no, String name, int age, String job, long phonenumber, int bookmark, int blacklist, String email, String memo) {
+	public Person(int no, String name, int age, String job, long phonenumber, int bookmark, int blacklist, String email, String memo, String profileimage, String imageurl) {
 		super();
 		this.no = no;
 		this.name = name;
@@ -28,6 +30,8 @@ public class Person {
 		this.blacklist=blacklist;
 		this.email=email;
 		this.memo=memo;
+		this.profileimage=profileimage;
+		this.imageurl=imageurl;
 	}
 
 	public int getNo() {
@@ -101,11 +105,30 @@ public class Person {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	
+	public String getProfileimage() {
+		return profileimage;
+	}
+
+	public void setProfileimage(String profileimage) {
+		this.profileimage = profileimage;
+	}
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
+	}
 
 
 	@Override
 	public String toString() {
-		return "Person [no=" + no + ", name=" + name + ", age=" + age + ", job=" + job + ",phonenumber=" + phonenumber  + ",bookmark=" + bookmark + ",blacklist=" + blacklist + "]";
+		return "Person [no=" + no + ", name=" + name + ", age=" + age 
+				+ ", job=" + job + ",phonenumber=" + phonenumber  
+				+ ",bookmark=" + bookmark + ",blacklist=" + blacklist 
+				+ ",profileimage=" + profileimage+ ",imageurl=" + imageurl +"]";
 	}
     
     

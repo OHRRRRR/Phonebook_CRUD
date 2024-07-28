@@ -5,11 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ureca.person.model.dao.PersonDAO">
  
   <insert id="insert" parameterType="Person">
-     insert into person (name, age, job, phonenumber, bookmark, blacklist, email,memo) values (#{name}, #{age}, #{job}, #{phonenumber}, #{bookmark}, #{blacklist},#{email}, #{memo})
+     insert into person (name, age, job, phonenumber, bookmark, blacklist, email,memo, profileimage, imageurl) values (#{name}, #{age}, #{job}, #{phonenumber}, #{bookmark}, #{blacklist},#{email}, #{memo}, #{profileimage}, #{imageurl})
   </insert>
   
   <update id="update" parameterType="Person">
-     update person set age=#{age}, job=#{job}, phonenumber=#{phonenumber}, bookmark=#{bookmark}, email=#{email}, memo=#{memo}  blacklist=#{blacklist} where no=#{no}
+     update person set age=#{age}, job=#{job}, phonenumber=#{phonenumber}, bookmark=#{bookmark}, email=#{email}, memo=#{memo}, profileimage=#{profileimage},  blacklist=#{blacklist}, imageurl=#{imageurl} where no=#{no}
   </update>
   
   <delete id="delete" parameterType="int">
@@ -17,11 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </delete>
   
   <select id="select" parameterType="int" resultType="Person">
-     select no, name, age, job, phonenumber, bookmark, blacklist, email, memo from person where no=#{no}
+     select no, name, age, job, phonenumber, bookmark, blacklist, email, memo, profileimage, imageurl from person where no=#{no}
   </select>
   
   <select id="selectAll" resultType="Person">
-     select no, name, age, job, phonenumber, bookmark, blacklist,email, memo from person <!-- order by no desc -->
+     select no, name, age, job, phonenumber, bookmark, blacklist,email, memo, profileimage, imageurl from person <!-- order by no desc -->
   </select>
   
 

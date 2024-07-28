@@ -13,7 +13,7 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #f5f5f5;
@@ -21,26 +21,19 @@ body {
 }
 
 #formtitle { 
-    margin-top: 50px; /* Adjusted margin */
+    margin-top: 50px;
     text-align: center;
-    font-size: 2em; 
+    font-size: 2em;
 }
 
 form {
     width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#star {
-    cursor: pointer;
-    font-size: 1.5em;
-    color: gray;
-    margin-left: 220px;
-    margin-right: 10px;
-    margin-top: -5px;
-    margin-bottom: 20px;
-}
-
-#block {
+#star, #block {
     cursor: pointer;
     font-size: 1.5em;
     color: gray;
@@ -58,12 +51,11 @@ input[type="text"], textarea {
 }
 
 textarea {
-    height: 100px; /* Adjust this value to increase or decrease the size */
-    resize: vertical; /* Allow users to resize the textarea vertically */
+    height: 100px;
+    resize: vertical;
 }
 
-#addbutton, #total,#black {
-    display: inline-block;
+#addbutton, #total, #black {
     background: black;
     color: white;
     padding: 10px 20px;
@@ -74,24 +66,12 @@ textarea {
     margin-top: 20px;
 }
 
-#total,#black {
-    background: black;
-    color: white;
-    margin-right: 20px;
-}
-
-#addbutton {
-    margin-right: 20px;
-}
-
 #button-container {
-    margin-left: -25px;
     display: flex;
-    justify-content: flex-start;
-    width: 450px;
+    justify-content: space-between;
+    width: 100%;
 }
 
-/* New styles for profile picture upload */
 #profile-picture-container {
     text-align: center;
     margin: 20px 0;
@@ -112,60 +92,58 @@ textarea {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 #upload-button {
-    color:black;
+    color: black;
     text-decoration: none;
     border: none;
-    align-items: center;   
+    align-items: center;
     margin-right: -5px;
-    
 }
 </style>
 </head>
 <body>
-  <h3 id="formtitle">새로운 연락처 등록</h3>
-  
-  <div id="profile-picture-container">
-    <div id="profile-picture">
-      <!-- Placeholder for profile picture -->
-      <img id="profile-img" src="default-profile.png" alt="" />
-    </div>
-    <a id="upload-button" href="#">사진 추가</a>
-  </div>
-  
+<h3 id="formtitle">새로운 연락처 등록</h3>
+
   <% 
     String phonenumber = request.getParameter("phonenumber");
     if (phonenumber == null) {
       phonenumber = "";
     }
   %>
-  
-  <form method="post">
+
+<form method="post" enctype="multipart/form-data">
+    <div id="profile-picture-container">
+        <div id="profile-picture">
+            <img id="profile-img" src="${person.profileimage}" alt="Profile Image" onerror="this.onerror=null; this.src='https://via.placeholder.com/200'">
+        </div>
+        <button id="upload-button" type="button">프로필 사진 선택</button>
+        <input type="file" id="file-input" name="file" style="display:none;" accept="image/*">
+    </div>
+
     <div>
-          <i id="star" class="fa-regular fa-star"></i>
-          <i id="block" class="fa-solid fa-toggle-on"></i>
+        <i id="star" class="fa-regular fa-star"></i>
+        <i id="block" class="fa-solid fa-toggle-on"></i>
     </div>
     <input type="text" name="name" placeholder="이름"><br>
     <input type="text" name="age" placeholder="나이"><br>
     <input type="text" name="job" placeholder="직업"><br>
-    <br>
     <input type="text" name="phonenumber" value="<%= phonenumber %>" placeholder="전화번호"><br>
     <input type="text" name="email" placeholder="이메일"><br>
-    <br>
     <textarea name="memo" placeholder="메모"></textarea><br>
-    
-    <!-- Hidden input to store the bookmark status -->
-    <input type="hidden" name="bookmark" id="bookmark" value="0"><br>
-    <input type="hidden" name="blacklist" id="blacklist" value="0"><br>
+    <input type="hidden" name="bookmark" id="bookmark" value="0">
+    <input type="hidden" name="blacklist" id="blacklist" value="0">
+    <input type="hidden" name="profileimage" id="profileimage" value="${person.profileimage}">
+
     <div id="button-container">
         <button type="submit" id="addbutton">추가하기</button>
         <a id="total" href="list">전체목록확인</a>
-        <a id="black" href="blacklist">차단목록확인</a>     
+        <a id="black" href="blacklist">차단목록확인</a>
     </div>
-  </form>
-  
+</form>
+
   <script>
     document.getElementById('star').addEventListener('click', function() {
       this.classList.toggle('fa-regular');
@@ -188,6 +166,24 @@ textarea {
     });
   </script>
   
-  
+
+<script>
+document.getElementById('upload-button').addEventListener('click', function() {
+    document.getElementById('file-input').click();
+});
+
+document.getElementById('file-input').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('profile-img').src = e.target.result;
+            // 여기서 파일 이름을 저장하지 말고, 데이터 URL을 저장하면 더 좋을 수 있습니다.
+            // document.getElementById('profileimage').value = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+</script>
 </body>
 </html>
