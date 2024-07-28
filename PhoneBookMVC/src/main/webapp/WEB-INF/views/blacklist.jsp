@@ -18,6 +18,26 @@
         background-color: #f5f5f5;
         font-family: Arial, sans-serif;
     }
+    
+           .menu-bar {
+        width: 150%;
+        background-color: #333;
+        overflow: hidden;
+    }
+
+    .menu-bar a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 20px 185px;
+        text-decoration: none;
+    }
+
+    .menu-bar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
 
     h3 {
         margin-top: 50px;
@@ -77,10 +97,10 @@
     }
 
     a:hover {
-        text-decoration: underline;
-    }
+/*         text-decoration: underline;
+ */    }
     i{
-      	margin-left: -110px ;
+      	margin-left: -150px ;
     
     }
 
@@ -102,16 +122,32 @@
     #total-link:hover {
         background-color: #333;
     }
+    
+            .profile-image {
+        width: 30px; /* Size of the image */
+        height: 30px; /* Size of the image */
+        border-radius: 50%; /* Circle shape */
+        object-fit: cover; /* Ensure the image covers the area */
+    }
+    
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 </head>
 <body>
-    <h3>차단된 사용자 목록</h3>
+
+<div class="menu-bar">
+    <a href="list"><i class="fa-solid fa-list"></i> 전체 목록</a>
+    <a href="blacklist"><i class="fa-solid fa-ban"></i > 차단 목록</a>
+    <a href="bookmark"><i class="fa-solid fa-star"></i> 즐겨찾기</a>
+    <a href="keypad"><i class="fa-solid fa-keyboard"></i> 키패드</a>
+</div>
+
+    <h3>차단목록</h3>
     
     <c:if test="${not empty blacklist}">
         <table>
             <tr>
-                <th>번호</th>
+                <th></th>
                 <th>이름</th>
                 <th>나이</th>
                 <th>직업</th>
@@ -120,11 +156,11 @@
             </tr>
             <c:forEach items="${blacklist}" var="person">
         <tr>
-          <td>${person.no}</td>
+          <td><img class="profile-image" src="${person.imageurl}" alt="Profile Image" onerror="this.src='https://mblogthumb-phinf.pstatic.net/MjAyMDA2MTBfMTY1/MDAxNTkxNzQ2ODcyOTI2.Yw5WjjU3IuItPtqbegrIBJr3TSDMd_OPhQ2Nw-0-0ksg.8WgVjtB0fy0RCv0XhhUOOWt90Kz_394Zzb6xPjG6I8gg.PNG.lamute/user.png?type=w800';"></td>
           <td><a href="upform?no=${person.no}">${person.name}</a></td>
           <td>${person.age}</td>
           <td>${person.job}</td>
-          <td>${person.phonenumber}</td>
+          <td>${person.phone}</td>
           <td style="text-align: center;">
           <c:choose>
               <c:when test="${person.blacklist == 1}">
@@ -141,7 +177,7 @@
   </c:if>
   <br>
   <div>
-  <a id="total-link" href="bookmark">즐겨찾기목록확인</a>
-  <a id="total-link" href="list">전체목록확인</a>
+<!--   <a id="total-link" href="bookmark">즐겨찾기목록확인</a>
+  <a id="total-link" href="list">전체목록확인</a> -->
 </body>
 </html>

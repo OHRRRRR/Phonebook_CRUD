@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>전화번호입력</title>
 <style type="text/css">
-    body, html {
+	body {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -16,12 +16,40 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: #f5f5f5; /* Optional: set a background color */
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
     }
-    #phonetitle {
+    
+            .menu-bar {
+        width: 100%;
+        background-color: #333;
+        overflow: hidden;
+    }
+
+    .menu-bar a {
+        float: left;
+        display: block;
+        color: white;
+/*         text-align: center;
+ */        padding: 20px 180px;
+        text-decoration: none;
+    }
+
+    .menu-bar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    
+        h3 {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 2em;
+    }
+    
+/*     #phonetitle {
         margin-bottom: 20px; 
         font-size: 2em; 
-    }
+    } */
     #add, #check {
         color: black;
         margin: 10px 5px;
@@ -49,7 +77,7 @@
         height: 23%;
         background: #eee;
         border: 2px solid black;
-        border-radius: 10px;
+        border-radius: 50px;
         font-size: 3em;
     }
     .keypad button.delete,
@@ -57,10 +85,24 @@
         background: black;
         color: white;
     }
+    
+        i {
+        margin-left: -150px;
+    }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
 </head>
 <body>
-    <h2 id="phonetitle">전화번호를 입력하세요</h2>
+
+<div class="menu-bar">
+    <a href="list"><i class="fa-solid fa-list"></i> 전체 목록</a>
+    <a href="blacklist"><i class="fa-solid fa-ban"></i > 차단 목록</a>
+    <a href="bookmark"><i class="fa-solid fa-star"></i> 즐겨찾기</a>
+    <a href="keypad"><i class="fa-solid fa-keyboard"></i> 키패드</a>
+</div>
+
+    <h3 id="phonetitle">전화번호를 입력하세요</h2>
     <a href="#" id="add">번호추가</a>
     <a href="list" id="check">전체확인하기</a>
     <input type="text" class="keypad" id="numInput" disabled="disabled" />
