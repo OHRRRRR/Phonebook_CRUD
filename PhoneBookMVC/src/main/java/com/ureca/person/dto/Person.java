@@ -5,13 +5,14 @@ public class Person {
     private String name;
     private int age;
     private String job;
-    private long phonenumber;
     private int bookmark;
     private int blacklist;
     private String email;
     private String memo;
     private String profileimage;
     private String imageurl;
+    private String phone;
+
 
 
     
@@ -19,19 +20,19 @@ public class Person {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Person(int no, String name, int age, String job, long phonenumber, int bookmark, int blacklist, String email, String memo, String profileimage, String imageurl) {
+	public Person(int no, String name, int age, String job, int bookmark, int blacklist, String email, String memo, String profileimage, String imageurl, String phone ) {
 		super();
 		this.no = no;
 		this.name = name;
 		this.age = age;
 		this.job = job;
-		this.phonenumber = phonenumber;
 		this.bookmark= bookmark;
 		this.blacklist=blacklist;
 		this.email=email;
 		this.memo=memo;
 		this.profileimage=profileimage;
 		this.imageurl=imageurl;
+		this.phone=phone;
 	}
 
 	public int getNo() {
@@ -66,13 +67,6 @@ public class Person {
 		this.job = job;
 	}
 	
-	public long getPhonenumber() {
-		return phonenumber;
-	}
-
-	public void setPhonenumber(long phonenumber) {
-		this.phonenumber = phonenumber;
-	}
 	
 	public int getBookmark() {
 		return bookmark;
@@ -121,12 +115,20 @@ public class Person {
     public void setImageurl(String imageurl) {
         this.imageurl = imageurl;
 	}
+    
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Person [no=" + no + ", name=" + name + ", age=" + age 
-				+ ", job=" + job + ",phonenumber=" + phonenumber  
+				+ ", job=" + job + ",phone=" + phone
 				+ ",bookmark=" + bookmark + ",blacklist=" + blacklist 
 				+ ",profileimage=" + profileimage+ ",imageurl=" + imageurl +"]";
 	}

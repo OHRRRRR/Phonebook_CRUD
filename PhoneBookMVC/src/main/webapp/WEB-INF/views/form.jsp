@@ -27,7 +27,7 @@ body {
 }
 
 form {
-    width: 300px;
+    width: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,6 +39,8 @@ form {
     color: gray;
     margin-top: -5px;
     margin-bottom: 20px;
+    margin-left: 10px
+    
 }
 
 input[type="text"], textarea {
@@ -51,7 +53,7 @@ input[type="text"], textarea {
 }
 
 textarea {
-    height: 100px;
+    height: 130px;
     resize: vertical;
 }
 
@@ -102,6 +104,8 @@ textarea {
     align-items: center;
     margin-right: -5px;
 }
+
+
 </style>
 </head>
 <body>
@@ -114,23 +118,24 @@ textarea {
     }
   %>
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" id="myform">
     <div id="profile-picture-container">
         <div id="profile-picture">
-            <img id="profile-img" src="${person.profileimage}" alt="Profile Image" onerror="this.onerror=null; this.src='https://via.placeholder.com/200'">
+            <img id="profile-img" src="${person.profileimage}" alt="Profile Image" onerror="this.onerror=null; this.src='https://mblogthumb-phinf.pstatic.net/MjAyMDA2MTBfMTY1/MDAxNTkxNzQ2ODcyOTI2.Yw5WjjU3IuItPtqbegrIBJr3TSDMd_OPhQ2Nw-0-0ksg.8WgVjtB0fy0RCv0XhhUOOWt90Kz_394Zzb6xPjG6I8gg.PNG.lamute/user.png?type=w800'">
         </div>
         <button id="upload-button" type="button">프로필 사진 선택</button>
         <input type="file" id="file-input" name="file" style="display:none;" accept="image/*">
     </div>
 
-    <div>
+    <div id="black_book">
         <i id="star" class="fa-regular fa-star"></i>
-        <i id="block" class="fa-solid fa-toggle-on"></i>
+        <i id="block" class="fa-solid fa-user"></i>
     </div>
+    
     <input type="text" name="name" placeholder="이름"><br>
     <input type="text" name="age" placeholder="나이"><br>
     <input type="text" name="job" placeholder="직업"><br>
-    <input type="text" name="phonenumber" value="<%= phonenumber %>" placeholder="전화번호"><br>
+    <input type="text" name="phone" value="<%= phonenumber %>" placeholder="전화번호" id="phonenumber">
     <input type="text" name="email" placeholder="이메일"><br>
     <textarea name="memo" placeholder="메모"></textarea><br>
     <input type="hidden" name="bookmark" id="bookmark" value="0">
@@ -142,6 +147,7 @@ textarea {
         <a id="total" href="list">전체목록확인</a>
         <a id="black" href="blacklist">차단목록확인</a>
     </div>
+    <br>
 </form>
 
   <script>
@@ -157,33 +163,30 @@ textarea {
   
    <script>
     document.getElementById('block').addEventListener('click', function() {
-      this.classList.toggle('fa-toggle-on');
-      this.classList.toggle('fa-toggle-off');
+      this.classList.toggle('fa-user');
+      this.classList.toggle('fa-user-slash');
 
       // Update the hidden input value based on the toggle state
-      var isSolidBlock = this.classList.contains('fa-toggle-off');
+      var isSolidBlock = this.classList.contains('fa-user-slash');
       document.getElementById('blacklist').value = isSolidBlock ? "1" : "0";
     });
   </script>
   
 
-<script>
-document.getElementById('upload-button').addEventListener('click', function() {
-    document.getElementById('file-input').click();
-});
+ <script>
+ document.addEventListener('DOMContentLoaded', function() {
+	    var form = document.getElementById('myform');
+	    form.onsubmit = function() {
+	        var phoneInput = document.getElementById('phonenumber');
+	        console.log('Final phone number being sent:', phoneInput.value);
+	        // 폼 데이터가 서버로 전송되는 것을 보려면 이 부분을 주석 처리하세요.
+	        return true; // 이 부분을 false로 바꾸면 폼 제출이 차단됩니다, 디버깅을 위해 사용할 수 있습니다.
+	    };
+	});
 
-document.getElementById('file-input').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('profile-img').src = e.target.result;
-            // 여기서 파일 이름을 저장하지 말고, 데이터 URL을 저장하면 더 좋을 수 있습니다.
-            // document.getElementById('profileimage').value = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-});
-</script>
+</script> 
+
+
+
 </body>
 </html>

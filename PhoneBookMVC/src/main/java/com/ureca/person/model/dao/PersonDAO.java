@@ -9,7 +9,7 @@ import com.ureca.person.dto.Person;
 
 @Mapper
 public interface PersonDAO {
-		
+	
 	public int insert(Person person)throws SQLException;//나는 sql실행만 전념하겠어!!
 	public int update(Person person)throws SQLException;
 	public int delete(int no)throws SQLException;

@@ -28,6 +28,8 @@ import com.ureca.person.model.service.PersonService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+
+
 @Controller //스프링 컨테이너로 객체 관리 받고 싶어요!!
 @RequestMapping("/person")
 public class PersonController  {
@@ -39,7 +41,6 @@ public class PersonController  {
     private String uploadDir;
     
     
-
 //	@RequestMapping("/form") //요청URL정의   ==>1.
 //	@RequestMapping(value = "/form", method = RequestMethod.GET) //요청URL정의   ==>1.
 	@GetMapping("/form")
@@ -48,6 +49,7 @@ public class PersonController  {
 	  return "form";  //  "/WEB-INF/views/"+ "form"  + ".jsp"    ==> 5. forward이동	
 	}
 	
+
 	@PostMapping("/form")
 	public String regist(@ModelAttribute Person person, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
 	    System.out.println(">>> POST form");
@@ -107,7 +109,7 @@ public class PersonController  {
 	            String lowerCaseQuery = query.toLowerCase();
 	            list = list.stream()
 	                       .filter(person -> person.getName().toLowerCase().contains(lowerCaseQuery) ||
-	                                         String.valueOf(person.getPhonenumber()).contains(query))
+	                                         String.valueOf(person.getPhone()).contains(query))
 	                       .collect(Collectors.toList());
 	        }
 
