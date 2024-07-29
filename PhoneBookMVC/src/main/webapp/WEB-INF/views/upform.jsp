@@ -41,6 +41,11 @@
     margin-left: 10px
     
 	}
+	
+	#star:hover, #block:hover{
+    color: #333;
+}
+	
     
      input[type="text"], textarea {
         width: 100%;
@@ -50,6 +55,22 @@
         border: 1px solid #ccc;
         box-sizing: border-box;
     }
+    
+    input.invalid {
+      width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid red;
+    box-sizing: border-box;
+}
+
+
+input.valid {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+    
     
     textarea {
     height: 130px;
@@ -74,13 +95,18 @@
     }
     
     #edit,#remove{
-    background: black;
+    background: gray;
     color: white;
     padding: 10px 30px;
     text-decoration: none;
     border: none;
     border-radius: 5px;
     margin-right: 20px;
+    
+    }
+    
+        #edit:hover, #remove:hover{
+        background: #333;
     
     }
     
@@ -117,6 +143,10 @@
     margin-right: -5px;
 	}
 
+   #upload-button:hover {
+        background-color: #333;
+        color:white;
+    }
 
 
 
@@ -137,7 +167,7 @@
 
   
 
-  <form method="post" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data" id="myform">
   	<!-- 프로필 이미지 컨테이너 추가 -->
   	<div id="profile-picture-container">
   		<div id="profile-picture">
@@ -148,16 +178,16 @@
     </div>
   
     <div id="black_book">
-        <i id="star" class="fa-regular fa-star"></i>
-        <i id="block" class="fa-solid fa-user"></i>
+    <i id="star" class="${person.bookmark == 1 ? 'fa-solid fa-star' : 'fa-regular fa-star'}"></i>
+    <i id="block" class="${person.blacklist == 1 ? 'fa-solid fa-user-slash' : 'fa-solid fa-user'}"></i>
     </div>
     
     <input type="hidden" name="no" value="${person.no}">
    
-    <input type="text" id="name" name="name" value="${person.name}"><br>
-    <input type="text" id="age" name="age" value="${person.age}"><br>
+    <input type="text" id="name" name="name" value="${person.name}">
+    <input type="text" id="age" name="age" value="${person.age}">
     <input type="text" id="job" name="job" value="${person.job}"><br>
-    <input type="text" id="phone" name="phone" value="${person.phone}"><br>
+    <input type="text" id="phone" name="phone" value="${person.phone}">
     <input type="text" id="email" name="email" value="${person.email}"><br>
     <textarea id="memo" name="memo">${person.memo}</textarea><br>   
     <input type="hidden" name="bookmark" id="bookmark" value="${person.bookmark}"><br>
@@ -174,9 +204,10 @@
   
   <script>
     document.getElementById('star').addEventListener('click', function() {
-      this.classList.toggle('fa-regular');
-      this.classList.toggle('fa-solid');
-
+    	if (document.getElementById('blacklist').value == 0 ){
+     	 this.classList.toggle('fa-regular');
+      	 this.classList.toggle('fa-solid');
+    	}
       var isSolidStar = this.classList.contains('fa-solid');
       document.getElementById('bookmark').value = isSolidStar ? "1" : "0";
     }); 
@@ -184,9 +215,10 @@
   
     <script>
     document.getElementById('block').addEventListener('click', function() {
-      this.classList.toggle('fa-user');
-      this.classList.toggle('fa-user-slash');
-
+    	if (document.getElementById('bookmark').value == 0 ){
+    	      this.classList.toggle('fa-user');
+    	      this.classList.toggle('fa-user-slash');
+    	}
       // Update the hidden input value based on the toggle state
       var isSolidBlock = this.classList.contains('fa-user-slash');
       document.getElementById('blacklist').value = isSolidBlock ? "1" : "0";
@@ -204,13 +236,34 @@ document.getElementById('file-input').addEventListener('change', function(event)
         const reader = new FileReader();
         reader.onload = function(e) {
             document.getElementById('profile-img').src = e.target.result;
-            // 여기서 파일 이름을 저장하지 말고, 데이터 URL을 저장하면 더 좋을 수 있습니다.
             // document.getElementById('profileimage').value = e.target.result;
         };
         reader.readAsDataURL(file);
     }
 });
 </script>
+
+<script>
+document.getElementById('phone').addEventListener('input', function(e) {
+    var phone = document.getElementById('phone');
+    phone.className = phone.value.match(/^\d{10,11}$/) ? 'valid' : 'invalid';
+});
+
+document.getElementById('email').addEventListener('input', function(e) {
+    var email = document.getElementById('email');
+    email.className = email.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) ? 'valid' : 'invalid';
+});
+
+document.getElementById('myform').onsubmit = function(e) {
+    var phone = document.getElementById('phone');
+    var email = document.getElementById('email');
+    if (!phone.value.match(/^\d{10,11}$/) || !email.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+        alert('형식에 맞게 입력해주세요.');
+        e.preventDefault();
+    }
+};
+</script>
+
 
 </body>
 </html>

@@ -44,7 +44,6 @@
     #menu_list{
        background-color: #f5f5f5;
                color: black;
-   
     }
     
 
@@ -114,7 +113,7 @@
  */    }
 
     i {
-        margin-left: -150px;
+        margin-left: -110px;
     }
 
     div {
@@ -210,7 +209,8 @@
       </c:forEach>		    
     </table>  
   </c:if>	  
-  <c:if test="${empty list}" >  
+  <c:if test="${empty list}" > 
+    <img id="noimg" src="https://cdn.icon-icons.com/icons2/67/PNG/512/emptybox_vacio_13363.png"></img>
     <p>등록된 정보가 없습니다.</p>
   </c:if>
   <br>

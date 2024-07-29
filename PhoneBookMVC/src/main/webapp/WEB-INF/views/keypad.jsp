@@ -46,6 +46,11 @@
         font-size: 2em;
     }
     
+        #menu_keypad{
+       background-color: #f5f5f5;
+               color: black;
+    }
+    
 /*     #phonetitle {
         margin-bottom: 20px; 
         font-size: 2em; 
@@ -54,7 +59,17 @@
         color: black;
         margin: 10px 5px;
         text-decoration: none;
+        border: none;
+        
+        
     }
+    
+        #add:hover, #check:hover {
+        background-color: #333;
+        color:white;
+    }
+    
+    
     #numInput {
         color: black;
         background: white;
@@ -76,15 +91,22 @@
         width: 31%;
         height: 23%;
         background: #eee;
-        border: 2px solid black;
+        border: 2px solid #333;
         border-radius: 50px;
         font-size: 3em;
     }
+    
+    .keypad button:hover {
+        background: #333;
+        color: white
+    }
+    
     .keypad button.delete,
     .keypad button.submit {
-        background: black;
+        background: #333;
         color: white;
     }
+    
     
         i {
         margin-left: -150px;
@@ -99,7 +121,7 @@
     <a href="list"><i class="fa-solid fa-list"></i> 전체 목록</a>
     <a href="blacklist"><i class="fa-solid fa-ban"></i > 차단 목록</a>
     <a href="bookmark"><i class="fa-solid fa-star"></i> 즐겨찾기</a>
-    <a href="keypad"><i class="fa-solid fa-keyboard"></i> 키패드</a>
+    <a href="keypad" id="menu_keypad"><i class="fa-solid fa-keyboard"></i> 키패드</a>
 </div>
 
     <h3 id="phonetitle">전화번호를 입력하세요</h2>
@@ -115,10 +137,10 @@
             // 번호추가 클릭
             $('#add').click(function() {
                 var phoneNumber = $('#numInput').val();
-                if (phoneNumber) {
+                if (phoneNumber.match(/^\d{10,11}$/)) {
                     window.location.href = 'form?phonenumber=' + encodeURIComponent(phoneNumber);
                 } else {
-                    alert('전화번호를 입력해주세요.');
+                    alert('형식에 맞게 입력해주세요.');
                 }
             });
         });

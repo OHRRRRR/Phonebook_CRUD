@@ -38,6 +38,11 @@
         background-color: #ddd;
         color: black;
     }
+    
+        #menu_black{
+       background-color: #f5f5f5;
+               color: black;
+    }
 
     h3 {
         margin-top: 50px;
@@ -100,7 +105,7 @@
 /*         text-decoration: underline;
  */    }
     i{
-      	margin-left: -150px ;
+      	margin-left: -110px ;
     
     }
 
@@ -137,7 +142,7 @@
 
 <div class="menu-bar">
     <a href="list"><i class="fa-solid fa-list"></i> 전체 목록</a>
-    <a href="blacklist"><i class="fa-solid fa-ban"></i > 차단 목록</a>
+    <a href="blacklist" id=menu_black><i class="fa-solid fa-ban"></i > 차단 목록</a>
     <a href="bookmark"><i class="fa-solid fa-star"></i> 즐겨찾기</a>
     <a href="keypad"><i class="fa-solid fa-keyboard"></i> 키패드</a>
 </div>
